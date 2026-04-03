@@ -51,7 +51,7 @@ function updateCart() {
   cartTotal.textContent = total;
 }
 
-// Checkout
+
 document.getElementById('checkout-btn').addEventListener('click', () => {
   if(cart.length === 0){
     alert("Your cart is empty!");
