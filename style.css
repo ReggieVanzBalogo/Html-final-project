@@ -90,13 +90,13 @@ header h1 {
 .product h2 {
   font-size: 1.3rem;
   margin: 10px 0 5px 0;
-  color: black;
+  color: white;
 }
 
 .product p {
   font-size: 1.1rem;
   margin: 5px 0 10px 0;
-  color: black;
+  color: white;
 }
 
 .product input.quantity {
