@@ -96,7 +96,7 @@ header h1 {
 .product p {
   font-size: 1.1rem;
   margin: 5px 0 10px 0;
-  color: black;
+  color: white;
 }
 
 .product input.quantity {
