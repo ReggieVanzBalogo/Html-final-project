@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="cart-icon" onclick="toggleCart()">
+    🛒 <span id="cart-count">0</span>
+</div>
+
+<div class="cart-box" id="cartBox">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p id="total">Total: ₱0</p>
+</div>
+
+<h2 class="title">My Shop</h2>
+
+<div class="container">
+
+    <div class="product-card">
+        <img src="t.jpg" class="main-img">
+        <h3>Basic T-Shirt</h3>
+        <p class="price">₱499</p>
+
+        <div class="sizes">
+            <button onclick="selectSize(this)">S</button>
+            <button onclick="selectSize(this)">M</button>
+            <button onclick="selectSize(this)">L</button>
+        </div>
+
+        <input type="number" value="1" min="1" class="qty">
+
+        <button class="cart-btn" onclick="addToCart(this, 'Vanz T-Shirt', 499)">
+            Add to Cart
+        </button>
+    </div>
+
+    <div class="product-card">
+        <img src="s.jpg" class="main-img">
+        <h3>Cool Sneakers</h3>
+        <p class="price">₱300</p>
+
+        <div class="sizes">
+            <button onclick="selectSize(this)">34</button>
+            <button onclick="selectSize(this)">38</button>
+            <button onclick="selectSize(this)">40</button>
+            <button onclick="selectSize(this)">42</button>
+        </div>
+
+        <input type="number" value="1" min="1" class="qty">
+
+        <button class="cart-btn" onclick="addToCart(this, 'Sneakers',300)">
+            Add to Cart
+        </button>
+    </div>
+
+</div>
+
+<script>
+let count = 0;
+let total = 0;
+
+function selectSize(btn){
+    let buttons = btn.parentElement.querySelectorAll("button");
+    buttons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+}
+
+function addToCart(btn, name, price){
+    let card = btn.parentElement;
+    let size = card.querySelector(".sizes .active");
+
+    if(!size){
+        alert("Select size first!");
+        return;
+    }
+
+    let qty = parseInt(card.querySelector(".qty").value);
+
+    let cart = document.getElementById("cart-items");
+    let li = document.createElement("li");
+
+    let itemTotal = price * qty;
+    total += itemTotal;
+
+    li.innerHTML = `
+        ${name} | Size: ${size.innerText} | Qty: ${qty} | ₱${itemTotal}
+        <span onclick="removeItem(this, ${itemTotal})">❌</span>
+    `;
+
+    cart.appendChild(li);
+
+    count++;
+    document.getElementById("cart-count").innerText = count;
+    document.getElementById("total").innerText = "Total: ₱" + total;
+
+    size.classList.remove("active");
+
+   
+    card.querySelector(".qty").value = 1;
+}
+
+function removeItem(el, price){
+    el.parentElement.remove();
+    count--;
+    total -= price;
+
+    document.getElementById("cart-count").innerText = count;
+    document.getElementById("total").innerText = "Total: ₱" + total;
+}
+
+function toggleCart(){
+    document.getElementById("cartBox").classList.toggle("show");
+}
+</script>
+
+</body>
+</html>
